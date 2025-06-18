@@ -96,7 +96,9 @@ Utilizamos o dataset **[Player Scores from Transfermarkt](https://www.kaggle.com
 |-------|----------|
 | **Perfil de Jogador** | Documento único contendo dados pessoais, estatísticas resumidas e série temporal de valor. |
 | **Dados de Jogos** | Cada partida como documento com lista de eventos/jogadores. |
-| **Esquema flexível** | Fácil adicionar campos futuros (redes sociais, prêmios). |
+| **Esquema flexível** | União da
+informação de maneira simplificada e direta, facilitando o processo de
+recuperação da mesma. |
 
 ### 4.3 Neo4j
 
