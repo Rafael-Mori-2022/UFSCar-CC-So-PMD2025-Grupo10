@@ -11,8 +11,8 @@
 
 1. [Introdução](#1-introdução)  
 2. [Objetivos do Projeto](#2-objetivos-do-projeto)  
-   - [Eixo 1 – Valor de Mercado & Transferências](#21-eixo-1-evolução-do-valor-de-mercado-e-impacto-das-transferências)  
-   - [Eixo 2 – Escalações & Substituições](#22-eixo-2-impacto-das-escalações-e-substituições-no-desempenho-do-time)  
+   - [Eixo 1 – Valor de Mercado e Transferências](#21-eixo-1-evolução-do-valor-de-mercado-e-impacto-das-transferências)  
+   - [Eixo 2 – Escalações e Substituições](#22-eixo-2-impacto-das-escalações-e-substituições-no-desempenho-do-time)  
    - [Eixo 3 – Trajetória de Jogadores](#23-eixo-3-análise-da-carreira-e-padrões-de-trajetória-de-jogadores)  
 3. [Fonte de Dados](#3-fonte-de-dados)  
 4. [Tecnologias Escolhidas e Justificativas](#4-tecnologias-escolhidas-e-justificativas)  
@@ -119,9 +119,9 @@ Utilizamos o dataset **[Player Scores from Transfermarkt](https://www.kaggle.com
 
 | Etapa | Descrição |
 |-------|-----------|
-| **Ingestão & Processamento (Spark)** | Leitura de CSV, ETL, joins e estatísticas agregadas. |
+| **Ingestão e Processamento (Spark)** | Leitura de CSV, ETL, joins e estatísticas agregadas. |
 | **Carga (Spark Connectors)** | - Escreve documentos JSON no MongoDB.<br>- Cria nós e arestas em Neo4j. |
-| **Análise & Consulta** | - Eixos 1 & 2 via MongoDB (perfis, jogos).<br>- Eixo 3 via Neo4j (redes de transferência). |
+| **Análise e Consulta** | - Eixos 1 e 2 via MongoDB (perfis, jogos).<br>- Eixo 3 via Neo4j (redes de transferência). |
 
 ---
 
