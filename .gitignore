@@ -1,6 +1,8 @@
 # pasta dos dados brutos do Kaggle
 /raw_data
 
+# Dados processados
+/pre-processing
 
 # Ambiente Virtual do Python
 venv/
