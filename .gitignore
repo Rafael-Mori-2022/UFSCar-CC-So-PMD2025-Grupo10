@@ -1,2 +1,24 @@
 # pasta dos dados brutos do Kaggle
-/data
+/raw_data
+
+# Dados processados
+/pre-processing
+
+# Ambiente Virtual do Python
+venv/
+.venv/
+*.env
+
+# Arquivos de configuração e cache do Python
+__pycache__/
+*.pyc
+
+# Arquivos de configuração de IDEs
+.vscode/
+.idea/
+
+# Credenciais
+.env
+
+# Arquivos de sistema do macOS
+.DS_Store
