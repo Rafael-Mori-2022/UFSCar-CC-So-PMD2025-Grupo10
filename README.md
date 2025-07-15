@@ -10,10 +10,10 @@
 ## Sumário
 
 1. [Introdução](#1-introdução)  
-2. [Objetivos do Projeto](#2-objetivos-do-projeto)  
-   - [Eixo 1 – Valor de Mercado e Transferências](#21-eixo-1-evolução-do-valor-de-mercado-e-impacto-das-transferências)  
-   - [Eixo 2 – Escalações e Substituições](#22-eixo-2-impacto-das-escalações-e-substituições-no-desempenho-do-time)  
-   - [Eixo 3 – Trajetória de Jogadores](#23-eixo-3-análise-da-carreira-e-padrões-de-trajetória-de-jogadores)  
+2. [Objetivos do Projeto](#2-objetivos-do-projeto)
+   - [Eixo 1 – Valor de Mercado e Transferências](#21-eixo-1-evolução-do-valor-de-mercado-e-impacto-das-transferências)
+   - [Eixo 2 – Escalações e Substituições](#22-eixo-2-impacto-das-escalações-e-substituições-no-desempenho-do-time)
+   - [Eixo 3 – Trajetória de Jogadores](#23-eixo-3-análise-da-carreira-e-padrões-de-trajetória-de-jogadores)
 3. [Fonte de Dados](#3-fonte-de-dados)  
 4. [Tecnologias Escolhidas e Justificativas](#4-tecnologias-escolhidas-e-justificativas)  
    - [Apache Spark](#41-apache-spark)  
@@ -21,8 +21,10 @@
    - [Neo4j](#43-neo4j)  
 5. [Arquitetura e Fluxograma de Dados](#5-arquitetura-e-fluxograma-de-dados)  
    - [Fluxograma de Dados](#51-fluxograma-de-dados)  
-   - [Descrição do Fluxo](#52-descrição-do-fluxo)  
-6. [Fontes e Referências Bibliográficas](#6-fontes-e-referências-bibliográficas)
+   - [Descrição do Fluxo](#52-descrição-do-fluxo)
+6. [Implementação do Pipeline](#6-implementação-do-pipeline)
+7. [Principais Resultados e Análises](#7-principais-resultados-e-análises)
+8. [Fontes e Referências Bibliográficas](#8-fontes-e-referências-bibliográficas)
 
 ---
 
@@ -125,7 +127,41 @@ Utilizamos o dataset **[Player Scores from Transfermarkt](https://www.kaggle.com
 
 ---
 
-## 6. Fontes e Referências Bibliográficas
+## 6. Implementação do Pipeline
+
+O desenvolvimento seguiu a **Arquitetura Medalhão** para garantir a qualidade e a rastreabilidade dos dados.
+
+| Camada | Descrição das Ações |
+|---|---|
+| **Bronze** | **Ingestão de Dados Brutos**: Leitura dos arquivos CSV com schemas explícitos para garantir performance e integridade de tipos. |
+| **Diagnóstico**| **Análise Exploratória (EDA)**: Identificação de problemas de qualidade, como valores nulos, milhares de registros com inconsistência referencial (chaves estrangeiras quebradas) e dados monetários em formato de texto. |
+| **Silver** | **Limpeza e Enriquecimento**: <br> • **Correção de Integridade**: Remoção de registros "órfãos". <br> • **Tratamento de Nulos**: Preenchimento estratégico de dados faltantes. <br> • **Engenharia de Atributos**: Criação da UDF `parse_euro` para converter valores monetários, cálculo da idade dos jogadores e reconstrução da métrica de valor de mercado dos clubes. <br> • **Persistência**: Checkpoint dos dados limpos em formato **Delta Lake**. |
+| **Gold** | **Modelagem e Carga**: <br> • **MongoDB**: Criação da coleção `players` (perfil 360°) e `games` (documento de partida). <br> • **Neo4j**: Criação de nós `:Player` e `:Club`, e relacionamentos direcionais `:TRANSFERRED_TO` e `:TRANSFERRED_FROM`. |
+
+---
+
+## 7. Principais Resultados e Análises
+
+A arquitetura implementada permitiu extrair os seguintes insights, alinhados aos objetivos do projeto:
+
+### Eixo 1: Análise do Valor de Mercado (MongoDB)
+- **Curva de Valorização**: A análise confirmou que o pico de valor de mercado dos jogadores ocorre, em média, entre **25 e 28 anos**.
+- **Clubes Valorizadores**: Clubes como **Manchester United** e **FC Bayern München** apresentaram as maiores médias de crescimento percentual no valor de seus atletas, indicando sucesso no desenvolvimento de talentos.
+- **ROI de Transferências**: O estudo de caso de Romelu Lukaku demonstrou a viabilidade de calcular o retorno financeiro de contratações, revelando tanto valorizações quanto desvalorizações em sua carreira.
+
+### Eixo 2: Análise de Impacto Tático (MongoDB)
+- **Eficácia de Formações**: A formação tática **4-2-3-1** foi identificada como a que possui a maior taxa de vitória para times jogando em casa.
+- **Dinâmica das Substituições**: A janela de tempo com maior frequência de substituições ocorre entre os **61 e 75 minutos** de jogo.
+- **Contribuição Ofensiva**: Foi confirmado que jogadores **titulares** marcam um volume de gols massivamente superior ao de jogadores reservas.
+
+### Eixo 3: Análise de Redes de Transferência (Neo4j)
+- **Trajetória de Carreira**: Foi possível mapear visualmente a carreira de jogadores como Álvaro Morata, exibindo seu percurso cronológico entre clubes em um grafo interativo.
+- **Rotas de Transferência**: As rotas **França ➜ Inglaterra** e **Inglaterra ➜ França** foram identificadas como as mais comuns, destacando um forte corredor de talentos entre os dois países.
+- **Clusters de Clubes**: A análise de redes revelou fortes laços comerciais entre pares de clubes como **Inter de Milão-Genoa** e **Juventus-Genoa**, que negociam jogadores entre si com alta frequência.
+
+---
+
+## 8. Fontes e Referências Bibliográficas
 
 1. Kaggle – **Player Scores from Transfermarkt**  
    <https://www.kaggle.com/datasets/davidcariboo/player-scores>  
@@ -139,5 +175,3 @@ Utilizamos o dataset **[Player Scores from Transfermarkt](https://www.kaggle.com
    <https://neo4j.com/developer/spark/>  
 6. Apache Spark Documentation  
    <https://spark.apache.org/docs/latest/>
-
----
