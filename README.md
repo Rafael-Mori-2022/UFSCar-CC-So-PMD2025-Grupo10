@@ -1,11 +1,24 @@
-# Universidade Federal de São Carlos  
-## Disciplina — Processamento Massivo de Dados (2025)
+# Projeto de Disciplina – Análise de Dados de Futebol do Transfermarkt
 
-**João Vitor Averaldo Antunes · RA 813979**  
-**Pedro Enrico Barchi Nogueira · RA 813099**  
-**Rafael Mori Pinheiro · RA 813851**
+**Universidade Federal de São Carlos**
+
+**Curso:** Bacharelado em Ciência da Computação de Sorocaba  
+**Disciplina:** Processamento Massivo de Dados  
+**Professora:** Profa. Dra. Sahudy Montenegro González  
 
 ---
+
+### Grupo: 10
+
+**Integrantes:**
+- João Vitor Averaldo Antunes (RA: 813979)
+- Pedro Enrico Barchi Nogueira (RA: 813099)
+- Rafael Mori Pinheiro (RA: 813851)
+
+---
+
+### Resumo:
+Este projeto implementa um pipeline de dados de ponta a ponta para processar e analisar um grande volume de informações do site Transfermarkt. Utilizando Apache Spark para o ETL, os dados são limpos e carregados em dois sistemas de banco de dados: MongoDB, para análises de perfis de jogadores e táticas de jogo, e Neo4j, para explorar as redes de transferências e trajetórias de carreira. O objetivo é extrair insights valiosos sobre a valorização de atletas, impacto tático e a dinâmica do mercado de futebol.
 
 ## Sumário
 
@@ -146,20 +159,51 @@ A arquitetura implementada permitiu extrair os seguintes insights, alinhados aos
 
 ### Eixo 1: Análise do Valor de Mercado (MongoDB)
 - **Curva de Valorização**: A análise confirmou que o pico de valor de mercado dos jogadores ocorre, em média, entre **25 e 28 anos**.
+
+<p align="center">
+  <img src="imgs/output1.png" alt="Gráfico de Valor de Mercado vs. Idade por Média de Gols" width="700"/>
+</p>
+
 - **Clubes Valorizadores**: Clubes como **Manchester United** e **FC Bayern München** apresentaram as maiores médias de crescimento percentual no valor de seus atletas, indicando sucesso no desenvolvimento de talentos.
+
+<p align="center">
+  <img src="imgs/output2.png" alt="Gráfico de Clubes por Média de Crescimento de Valor" width="700"/>
+</p>
+
 - **ROI de Transferências**: O estudo de caso de Romelu Lukaku demonstrou a viabilidade de calcular o retorno financeiro de contratações, revelando tanto valorizações quanto desvalorizações em sua carreira.
+
+<p align="center">
+  <img src="imgs/output3.png" alt="Gráfico de ROI para as Transferências de Romelu Lukaku" width="700"/>
+</p>
 
 ### Eixo 2: Análise de Impacto Tático (MongoDB)
 - **Eficácia de Formações**: A formação tática **4-2-3-1** foi identificada como a que possui a maior taxa de vitória para times jogando em casa.
+
+<p align="center">
+  <img src="imgs/output4.png" alt="Análise de Desempenho por Formação Tática" width="700"/>
+</p>
+
 - **Dinâmica das Substituições**: A janela de tempo com maior frequência de substituições ocorre entre os **61 e 75 minutos** de jogo.
+
+<p align="center">
+  <img src="imgs/output5.png" alt="Distribuição de Substituições e Gols ao Longo da Partida" width="700"/>
+</p>
+
 - **Contribuição Ofensiva**: Foi confirmado que jogadores **titulares** marcam um volume de gols massivamente superior ao de jogadores reservas.
+
+<p align="center">
+  <img src="imgs/output6.png" alt="Gols Totais: Titulares vs. Reservas" width="700"/>
+</p>
 
 ### Eixo 3: Análise de Redes de Transferência (Neo4j)
 - **Trajetória de Carreira**: Foi possível mapear visualmente a carreira de jogadores como Álvaro Morata, exibindo seu percurso cronológico entre clubes em um grafo interativo.
 - **Rotas de Transferência**: As rotas **França ➜ Inglaterra** e **Inglaterra ➜ França** foram identificadas como as mais comuns, destacando um forte corredor de talentos entre os dois países.
-- **Clusters de Clubes**: A análise de redes revelou fortes laços comerciais entre pares de clubes como **Inter de Milão-Genoa** e **Juventus-Genoa**, que negociam jogadores entre si com alta frequência.
 
----
+<p align="center">
+  <img src="imgs/output7.png" alt="Grafo da Trajetória de Carreira de Álvaro Morata" width="700"/>
+</p>
+
+- **Clusters de Clubes**: A análise de redes revelou fortes laços comerciais entre pares de clubes como **Inter de Milão-Genoa** e **Juventus-Genoa**, que negociam jogadores entre si com alta frequência.
 
 ## 8. Fontes e Referências Bibliográficas
 
@@ -175,3 +219,6 @@ A arquitetura implementada permitiu extrair os seguintes insights, alinhados aos
    <https://neo4j.com/developer/spark/>  
 6. Apache Spark Documentation  
    <https://spark.apache.org/docs/latest/>
+
+
+> Para uma visão completa da implementação, incluindo o código-fonte detalhado de cada etapa, a execução da análise exploratória e o acesso a plots e visualizações adicionais, recomendamos fortemente a consulta ao notebook principal do projeto: **`Projeto_PMD.ipynb`**.
